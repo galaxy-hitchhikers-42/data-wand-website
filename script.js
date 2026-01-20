@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const frame = document.querySelector('.frame');
 
+    // Mark JS as ready - this enables the hide-then-reveal animations
+    // Content stays visible if JS fails to load
+    body.classList.add('js-ready');
+
     // --- CURSOR PHYSICS & INTERACTION ---
     let mouseX = 0;
     let mouseY = 0;
@@ -142,6 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SCROLL REVEALS ---
     const revealElements = document.querySelectorAll('.reveal-text, .fade-up');
 
+    // Function to check and reveal elements in viewport
+    function revealInViewport() {
+        revealElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add('visible');
+            }
+        });
+    }
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -152,15 +166,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Trigger reveal for elements already in viewport on page load
-    setTimeout(() => {
-        revealElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                el.classList.add('visible');
-            }
-        });
-    }, 100);
+    // Multiple fallbacks to ensure reveals work across all browsers/devices
+    // 1. Immediate check after DOM ready
+    revealInViewport();
+
+    // 2. After first paint with requestAnimationFrame
+    requestAnimationFrame(() => {
+        requestAnimationFrame(revealInViewport);
+    });
+
+    // 3. After window load (images, fonts, etc.)
+    window.addEventListener('load', revealInViewport);
+
+    // 4. After a short delay as final fallback
+    setTimeout(revealInViewport, 300);
+
+    // 5. On any scroll to catch edge cases
+    let scrollRevealed = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollRevealed) {
+            revealInViewport();
+            scrollRevealed = true;
+        }
+    }, { once: false });
 
     // --- KINETIC TYPOGRAPHY (HERO PARALLAX) ---
     const heroTitle = document.querySelector('.hero-title');
