@@ -1,5 +1,5 @@
 /* ============================================
-   DataWand — Global JavaScript
+   Data Wand — Global JavaScript
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
