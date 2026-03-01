@@ -1,4 +1,4 @@
-# Data Wand — Remix Product Site Spec
+# Data Wand — React Router Product Site Spec
 
 Version 2.0 (Draft)  
 Date: March 2026
@@ -11,12 +11,12 @@ Before major feature implementation, complete a short hardening + parity cycle:
 2. Maintain security policy:
    - Prod/runtime dependencies must remain at 0 known vulnerabilities
    - Dev/build vulnerabilities are tracked and reduced intentionally (no blind auto-fix)
-3. Reach full staging navigability for all public marketing routes in Remix
+3. Reach full staging navigability for all public marketing routes in React Router
 4. Only then begin broader auth/dashboard feature delivery
 
 ## 1. Objective
 
-Keep the current static marketing site live on Vercel while building a new full product hub in Remix, deployed on Render.  
+Keep the current static marketing site live on Vercel while building a new full product hub in React Router framework mode, deployed on Render.  
 Cut over only after auth, billing, and dashboard parity is complete.
 
 ## 2. Current State
@@ -28,24 +28,24 @@ Cut over only after auth, billing, and dashboard parity is complete.
 
 ## 3. Target Architecture
 
-- Framework: Remix (full-stack React)
+- Framework: React Router framework mode (full-stack React)
 - Hosting: Render (web service)
 - Auth + DB: Supabase
 - Billing: Stripe (Checkout + Portal + Webhooks)
 - Styling: Tailwind CSS (or existing CSS migration path)
 - Deployment model:
 - Existing static site remains production during build
-- Remix app lives under `apps/web`
+- React Router app lives under `apps/web`
 - Staging URL on Render for integration testing
 
 ## 4. Repository Strategy
 
 - Keep static site at repo root (current production)
-- Add Remix app at `apps/web`
+- Add React Router app at `apps/web`
 - New active branch for app build (for example `remix-app`)
-- Deploy Remix staging from `apps/web` on Render
+- Deploy staging from `apps/web` on Render
 
-## 5. Route Plan (Remix)
+## 5. Route Plan (React Router)
 
 ### Public Marketing
 
@@ -75,7 +75,7 @@ Cut over only after auth, billing, and dashboard parity is complete.
 ## 6. Auth & Billing Flows
 
 - Supabase session-based auth
-- Protected routes enforced in Remix loaders
+- Protected routes enforced in React Router loaders
 - Stripe customer per profile
 - Webhook-driven subscription sync to Supabase profiles
 
@@ -105,7 +105,7 @@ Implication: we must plan identity unification, not greenfield auth.
 
 ## 6.2 Identity Unification Decision
 
-Target for Remix should match the prior recommendation from planning docs:
+Target for the web app should match the prior recommendation from planning docs:
 
 - Preferred: move Worker auth to Supabase Auth JWT validation (single identity)
 - Transitional fallback: keep Worker auth and add account-linking (`profile_id`)
@@ -119,7 +119,7 @@ Cloudflare remains in scope even if the web app is hosted on Render:
 
 - Cloudflare DNS continues to manage `data-wand.ai` records
 - Cloudflare Worker can continue to serve LLM proxy endpoints
-- Remix app integrates with Worker/Supabase for account and usage visibility
+- React Router app integrates with Worker/Supabase for account and usage visibility
 
 Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 
@@ -141,7 +141,7 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 
 - Current assumption: Cloudflare currently holds production secrets used by the
   Worker/Supabase integration.
-- Remix on Render should use a separate environment-variable set in Render.
+- React Router app on Render should use a separate environment-variable set in Render.
 - Secret values should be copied from the authoritative operator source, not
   re-generated ad hoc.
 - Required verification step: Kelly (or current infra owner) confirms which
@@ -151,7 +151,7 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 
 ### Phase 1 — Scaffold + Hardening
 
-- Initialize Remix app in `apps/web`
+- Initialize app in `apps/web`
 - Set up base layout + shared nav/footer
 - Add health route and deploy to Render staging
 - Perform dependency/security triage baseline:
@@ -215,3 +215,9 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 - Styling migration approach:
 - Keep current CSS and incrementally modernize
 - Tailwind-first rewrite during port
+
+## 11. Current Build/Tooling Status (2026-03-01)
+
+- Migration to React Router framework tooling completed on `remix-app`
+- Build warning status: Vite CJS deprecation warning no longer present
+- Security status: full and prod-only audits both report 0 vulnerabilities
