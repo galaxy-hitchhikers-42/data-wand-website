@@ -16,3 +16,9 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+
+# Node
+node_modules/
+npm-debug.log*
+apps/web/build/
+apps/web/public/build/
