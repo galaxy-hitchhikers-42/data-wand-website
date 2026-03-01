@@ -1,16 +1,15 @@
-import type { LinksFunction, MetaFunction } from '@remix-run/node';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 
 import stylesheet from './styles/global.css?url';
 
-export const meta: MetaFunction = () => {
+export const meta = () => {
   return [
     { title: 'Data Wand | Remix App (Staging)' },
     { name: 'description', content: 'Remix staging app for Data Wand product hub.' }
   ];
 };
 
-export const links: LinksFunction = () => {
+export const links = () => {
   return [{ rel: 'stylesheet', href: stylesheet }];
 };
 
@@ -27,7 +26,6 @@ export default function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
