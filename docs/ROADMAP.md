@@ -12,6 +12,9 @@ Last updated: March 2026
 - [x] Completed successful Render staging build/deploy from `remix-app`
 - [x] Added `docs/MCP_SETUP.md` with Render MCP setup steps
 - [x] Pinned `apps/web` Node engine to `20.x` for LTS runtime stability
+- [x] Migrated `apps/web` from Remix v2 CLI to React Router framework tooling
+- [x] Removed Vite CJS deprecation warning from build output
+- [x] Verified full `npm audit` and `npm audit --omit=dev` at 0 vulnerabilities
 
 ## Current State
 
@@ -20,13 +23,14 @@ Last updated: March 2026
 - [x] GitHub Pages disabled
 - [x] Root `README.md` standardized across active branches
 - [x] Vercel branch deploys constrained via `vercel.json` (`master` only)
+- [x] Render staging route parity wired to legacy marketing pages in `apps/web/static-pages`
 
 ## In Progress
 
-- [x] Remix scaffold created at `apps/web` on `remix-app` branch
+- [x] React Router scaffold created at `apps/web` on `remix-app` branch
 - [x] Render staging deployment from `apps/web`
-- [ ] Marketing page parity in Remix
-- [ ] Full internal route navigability in Remix staging (all public routes linked and working)
+- [x] Marketing route parity wiring complete in staging app
+- [ ] Manual visual QA sweep on Render staging URL for all public routes/assets
 - [ ] Split-host routing decision for staging (`data-wand.ai` + `app.data-wand.ai`) vs unified host
 
 ## Planned
@@ -34,12 +38,12 @@ Last updated: March 2026
 - [ ] Dependency/security hardening cycle (before heavy feature build):
   - [x] Audit triage baseline complete (`npm audit` + `npm audit --omit=dev`)
   - [x] Runtime/prod vulnerabilities confirmed at 0
-  - [ ] Dev/build toolchain vulnerability reduction via controlled upgrades
-  - [ ] Upgrade spike: evaluate Remix + Vite ecosystem upgrade path without breaking build
-- [ ] Remix route parity implementation checklist:
-  - [ ] Port existing static routes (`/`, `/about`, `/how-it-works`, `/pricing`, `/use-cases/:slug`)
-  - [ ] Ensure static assets and CSS/JS load under Remix routing
-  - [ ] Validate no broken internal links (desktop + mobile)
+  - [x] Dev/build vulnerabilities reduced to 0 after React Router migration
+  - [x] Upgrade spike completed: moved to React Router framework tooling
+- [ ] React Router parity verification checklist:
+  - [x] Ported static route set (`/`, `/about`, `/how-it-works`, `/pricing`, `/use-cases/:slug`)
+  - [x] Static assets (CSS/JS/images) served from `apps/web/public`
+  - [ ] Validate no broken internal links (desktop + mobile) on Render staging
   - [ ] Preserve canonical tags, sitemap, robots behavior
 - [ ] Supabase auth/profile model verification with current production setup
 - [ ] Identity unification plan (Cloudflare Worker auth -> Supabase Auth JWTs, or account linking)
