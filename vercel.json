@@ -28,39 +28,6 @@
       "source": "/:path*.html",
       "destination": "/:path*",
       "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.data-wand.ai"
-        }
-      ],
-      "destination": "https://data-wand.ai/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "data-wand.com"
-        }
-      ],
-      "destination": "https://data-wand.ai/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.data-wand.com"
-        }
-      ],
-      "destination": "https://data-wand.ai/:path*",
-      "permanent": true
     }
   ]
 }
