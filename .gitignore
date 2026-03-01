@@ -1,6 +1,7 @@
 # Internal docs
 *.md
 !README.md
+!AGENTS.md
 
 # Claude Code
 .claude/
