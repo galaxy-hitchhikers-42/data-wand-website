@@ -2,6 +2,7 @@
 *.md
 !README.md
 !AGENTS.md
+!docs/*.md
 
 # Claude Code
 .claude/
