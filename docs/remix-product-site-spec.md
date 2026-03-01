@@ -3,6 +3,17 @@
 Version 2.0 (Draft)  
 Date: March 2026
 
+## 0. Immediate Execution Priority (Current)
+
+Before major feature implementation, complete a short hardening + parity cycle:
+
+1. Keep runtime stable on Node 20 LTS in Render (`engines.node = 20.x`)
+2. Maintain security policy:
+   - Prod/runtime dependencies must remain at 0 known vulnerabilities
+   - Dev/build vulnerabilities are tracked and reduced intentionally (no blind auto-fix)
+3. Reach full staging navigability for all public marketing routes in Remix
+4. Only then begin broader auth/dashboard feature delivery
+
 ## 1. Objective
 
 Keep the current static marketing site live on Vercel while building a new full product hub in Remix, deployed on Render.  
@@ -117,6 +128,7 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 - Service root directory: `apps/web`
 - Build command: app build script in `apps/web`
 - Start command: app start script in `apps/web`
+- Runtime: Node 20 LTS (`20.x`) for framework/tooling stability
 - Staging env vars:
 - `SUPABASE_URL`
 - `SUPABASE_ANON_KEY`
@@ -137,15 +149,21 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 
 ## 8. Migration Phases
 
-### Phase 1 — Scaffold
+### Phase 1 — Scaffold + Hardening
 
 - Initialize Remix app in `apps/web`
 - Set up base layout + shared nav/footer
 - Add health route and deploy to Render staging
+- Perform dependency/security triage baseline:
+- Run `npm audit` (full dependency tree)
+- Run `npm audit --omit=dev` (runtime vulnerability gate)
+- Track findings and planned upgrades in roadmap/issues
 
-### Phase 2 — Marketing Parity
+### Phase 2 — Marketing Parity + Navigability
 
 - Port all existing public pages/content
+- Ensure all internal links are navigable in staging
+- Ensure CSS/JS/image assets load correctly on all migrated routes
 - Preserve SEO tags, sitemap, robots, OG tags
 - Ensure route parity and redirects
 
@@ -180,6 +198,8 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 ## 9. Acceptance Criteria
 
 - All current marketing pages preserved with no SEO regression
+- All public routes fully navigable in Render staging
+- No broken static assets (CSS/JS/images/fonts) on migrated routes
 - Auth, billing, and dashboard flows working end-to-end
 - No dependency on Vercel-specific runtime behavior
 - Staging and production run on Render from `apps/web`
