@@ -1,43 +1,33 @@
-# Data Wand Site Migration Checklist (GitHub Pages -> Vercel)
+# Vercel Migration Notes (Completed)
 
-This checklist prepares the current static marketing site for Vercel before the Next.js rebuild begins.
+GitHub Pages -> Vercel cutover for this static site is complete.
 
-## What Is Already In This Repo
+## Current Deployment State
 
-1. `vercel.json` enables clean URLs for existing `.html` files (`/about` -> `about.html`, `/use-cases/non-profits` -> `use-cases/non-profits.html`).
-2. `vercel.json` adds canonical host redirects to `https://data-wand.ai`.
-3. Redirected hosts are `www.data-wand.ai`, `data-wand.com`, and `www.data-wand.com`.
+1. Hosting: Vercel
+2. Production branch: `master`
+3. Canonical domain: `https://data-wand.ai`
+4. GitHub Pages: disabled
+5. `.com` redirects: managed via GoDaddy forwarding to `https://data-wand.ai`
 
-## Vercel Project Setup
+## Repository Configuration
 
-1. Import this GitHub repo into Vercel.
-2. Framework preset: `Other` (static).
-3. Build command: leave empty.
-4. Output directory: leave empty (repo root).
-5. Deploy and verify preview URL routes: `/`, `/how-it-works`, `/pricing`, `/about`, and `/use-cases/non-profits` (plus all other use cases).
-6. Verify unknown routes return the custom 404 page.
+1. `vercel.json` handles clean URL routing for static pages:
+- `/` -> `index.html`
+- `/about` -> `about.html`
+- `/how-it-works` -> `how-it-works.html`
+- `/pricing` -> `pricing.html`
+- `/use-cases/:slug` -> `/use-cases/:slug.html`
+2. `/:path*.html` permanently redirects to `/:path*`.
 
-## Cloudflare DNS Cutover
+## Post-Cutover Checks
 
-1. In Vercel, add domains `data-wand.ai` (primary), `www.data-wand.ai`, `data-wand.com`, and `www.data-wand.com`.
-2. In Cloudflare DNS, update required records to Vercel targets (as shown by Vercel domain setup).
-3. Remove or disable any conflicting GitHub Pages DNS records.
+1. `https://data-wand.ai` loads with full styling/scripts.
+2. `https://www.data-wand.ai` redirects to `https://data-wand.ai` (if apex is canonical).
+3. `https://data-wand.ai/styles.css` and `https://data-wand.ai/script.js` return `200`.
+4. `https://data-wand.com` and `https://www.data-wand.com` redirect to `https://data-wand.ai`.
+5. `https://data-wand.ai/robots.txt` and `https://data-wand.ai/sitemap.xml` are reachable.
 
-## GitHub Pages Decommission
+## Next Phase
 
-1. In GitHub repo settings, disable GitHub Pages.
-2. Keep `CNAME` in this repo only if GitHub Pages remains temporarily active.
-3. After full cutover confirmation, remove `CNAME` in a cleanup PR.
-
-## Post-Cutover Verification
-
-1. Verify `https://www.data-wand.ai/pricing` redirects to `https://data-wand.ai/pricing`.
-2. Verify `https://data-wand.com/` redirects to `https://data-wand.ai/`.
-3. Verify `https://data-wand.ai/robots.txt` is reachable.
-4. Verify `https://data-wand.ai/sitemap.xml` is reachable.
-5. Verify OG image URLs resolve correctly from shared links.
-6. Verify no broken assets (icons, images, CSS, JS) on desktop and mobile.
-
-## Next Step (Phase 2)
-
-After this static cutover is stable, initialize the Next.js App Router project and port pages incrementally using the product spec.
+Planned Next.js migration work is tracked separately in the product planning docs.
