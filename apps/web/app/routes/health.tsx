@@ -1,6 +1,5 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
+import type { LoaderFunctionArgs } from 'react-router';
 
 export async function loader(_args: LoaderFunctionArgs) {
-  return json({ ok: true, service: 'data-wand-web', runtime: 'remix' });
+  return Response.json({ ok: true, service: 'data-wand-web', runtime: 'react-router' });
 }
