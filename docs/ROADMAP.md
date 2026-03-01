@@ -2,6 +2,15 @@
 
 Last updated: March 2026
 
+## Session Checkpoint (2026-03-01)
+
+- [x] Vercel migration completed and validated on `data-wand.ai`
+- [x] `vercel-migration` branch deleted (local + remote)
+- [x] `remix-app` scaffold created at `apps/web`
+- [x] Project MCP file added at `.vscode/mcp.json` (Render server via env var token)
+- [ ] Generate and commit `apps/web/package-lock.json` for Render `npm ci` builds
+- [ ] Complete first successful Render staging deploy from `remix-app`
+
 ## Current State
 
 - [x] GitHub Pages -> Vercel migration completed for static marketing site
