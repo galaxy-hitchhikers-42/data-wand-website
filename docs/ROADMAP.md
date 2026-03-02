@@ -19,6 +19,10 @@ Last updated: March 2026
 ## Session Checkpoint (2026-03-02)
 
 - [x] Merged `master` into `remix-app` and resolved planning-doc conflicts
+- [x] Merged `remix-app` into `master` and deleted `remix-app` remote branch
+- [x] Updated Render service to deploy from `master`
+- [x] Enabled Render Pull Request Previews for PR validation
+- [x] Added Render GitHub check workflow (`.github/workflows/render-preview-check.yml`)
 - [ ] CodeRabbit remediation batch in progress for static-page parity issues:
   - [x] Initial accessibility semantics cleanup (dropdown/menu roles and mobile nav landmarks)
   - [x] Initial root-relative asset path normalization for use-case pages
@@ -39,9 +43,13 @@ Last updated: March 2026
 - [x] Render staging deployment from `apps/web`
 - [x] Marketing route parity wiring complete in staging app
 - [x] Dependency/security hardening cycle baseline completed
+- [x] Render production deployment source set to `master`
+- [x] Render PR previews enabled for branch/PR testing
+- [x] Team branch workflow decided: `feature/*` -> `staging` -> `master`
 
 ## In Progress
 
+- [ ] Adopt/verify `staging` release branch flow in daily development (feature PRs to `staging`, release PRs to `master`)
 - [ ] Repo-wide static-page consistency sweep (remaining menu/mobile-nav semantics, root-relative asset paths, and footer-year normalization)
 - [ ] Manual visual QA sweep on Render staging URL for all public routes/assets
 - [ ] Split-host routing decision for staging (`data-wand.ai` + `app.data-wand.ai`) vs unified host
