@@ -30,6 +30,7 @@ Last updated: March 2026
   - [ ] Repo-wide follow-up sweep still needed on untouched static pages
 - [x] Added environment-aware `robots.txt` route in `apps/web` (noindex behavior for non-production hosts)
 - [x] Verified local `apps/web` build passes after remediation (`npm run build`)
+- [x] Chosen edge-performance direction: Render origin + Cloudflare cache rules for marketing routes only
 
 ## Current State
 
@@ -56,6 +57,11 @@ Last updated: March 2026
 
 ## Planned
 
+- [ ] Edge caching/performance architecture:
+  - [ ] Implement Cloudflare edge caching policy for marketing routes in front of Render origin
+  - [ ] Keep app/auth/api routes uncached at edge
+  - [ ] Measure before/after performance impact and tune cache headers
+  - [ ] Document operational rules in `docs/EDGE_CACHING_STRATEGY.md`
 - [ ] React Router parity verification checklist (remaining):
   - Completed:
   - [x] Ported static route set (`/`, `/about`, `/how-it-works`, `/pricing`, `/use-cases/:slug`)
