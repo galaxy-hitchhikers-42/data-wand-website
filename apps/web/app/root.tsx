@@ -4,8 +4,12 @@ import stylesheet from './styles/global.css?url';
 
 export const meta = () => {
   return [
-    { title: 'Data Wand | Remix App (Staging)' },
-    { name: 'description', content: 'Remix staging app for Data Wand product hub.' }
+    { title: 'Data Wand — Stop Typing. Start Snapping.' },
+    {
+      name: 'description',
+      content:
+        'Take a photo of any paper form with your iPhone. Data Wand reads it and fills in your computer automatically. Private by default with optional AI-assisted recognition. Free to start.'
+    }
   ];
 };
 

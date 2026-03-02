@@ -66,7 +66,7 @@
 
   /* Typography */
   --font-heading: 'Outfit', sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  --font-body: -apple-system, 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'Roboto', sans-serif;
   --font-size-base: 18px;
   --line-height-base: 1.6;
   --line-height-heading: 1.15;
@@ -367,6 +367,7 @@ strong {
 }
 
 .nav-dropdown:hover .nav-dropdown-trigger svg,
+.nav-dropdown:focus-within .nav-dropdown-trigger svg,
 .nav-dropdown.open .nav-dropdown-trigger svg {
   transform: rotate(180deg);
 }
@@ -388,6 +389,7 @@ strong {
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
 .nav-dropdown.open .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;

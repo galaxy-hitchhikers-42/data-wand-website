@@ -1,6 +1,12 @@
-# Data Wand Web (Remix)
+# Data Wand Web (React Router)
 
-Remix app scaffold for the full product hub (auth, billing, dashboard).
+React Router framework-mode app scaffold for the full product hub (auth, billing, dashboard).
+
+## Stack Notes
+
+- Framework config: `apps/web/react-router.config.ts`
+- Vite integration: `@react-router/dev/vite` in `apps/web/vite.config.ts`
+- Route manifest: `apps/web/app/routes.ts`
 
 ## Local Development
 
