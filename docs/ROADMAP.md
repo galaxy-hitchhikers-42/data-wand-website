@@ -16,6 +16,16 @@ Last updated: March 2026
 - [x] Removed Vite CJS deprecation warning from build output
 - [x] Verified full `npm audit` and `npm audit --omit=dev` at 0 vulnerabilities
 
+## Session Checkpoint (2026-03-02)
+
+- [x] Merged `master` into `remix-app` and resolved planning-doc conflicts
+- [x] Completed CodeRabbit remediation batch for static-page parity issues:
+  - [x] Accessibility semantics cleanup (dropdown/menu roles and mobile nav landmarks)
+  - [x] Root-relative asset path normalization for use-case pages
+  - [x] Metadata/copy refresh and stale footer year updates
+- [x] Added environment-aware `robots.txt` route in `apps/web` (noindex behavior for non-production hosts)
+- [x] Verified local `apps/web` build passes after remediation (`npm run build`)
+
 ## Current State
 
 - [x] GitHub Pages -> Vercel migration completed for static marketing site
@@ -45,6 +55,11 @@ Last updated: March 2026
   - [x] Static assets (CSS/JS/images) served from `apps/web/public`
   - [ ] Validate no broken internal links (desktop + mobile) on Render staging
   - [ ] Preserve canonical tags, sitemap, robots behavior
+- [ ] Post-cutover runtime upgrade: Node 20 -> Node 22 (before Node 20 EOL)
+  - [ ] Switch `apps/web` engine/runtime target to Node 22
+  - [ ] Reinstall dependencies and refresh lockfile on Node 22
+  - [ ] Run build/smoke tests and resolve compatibility issues
+  - [ ] Re-run CodeRabbit on the Node 22 upgrade PR
 - [ ] Supabase auth/profile model verification with current production setup
 - [ ] Identity unification plan (Cloudflare Worker auth -> Supabase Auth JWTs, or account linking)
 - [ ] Dashboard usage integration across extension, iOS, and web app
