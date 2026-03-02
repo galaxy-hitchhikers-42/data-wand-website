@@ -50,6 +50,6 @@ Then open the local dev URL printed by the React Router dev server.
 ## Planning Docs
 
 - `docs/ROADMAP.md`
-- `docs/remix-product-site-spec.md`
+- `docs/react-router-product-site-spec.md`
 - `docs/RENDER_GITHUB_CHECKS.md`
 - `docs/EDGE_CACHING_STRATEGY.md`

@@ -6,20 +6,20 @@ Last updated: March 2026
 
 - [x] Vercel migration completed and validated on `data-wand.ai`
 - [x] `vercel-migration` branch deleted (local + remote)
-- [x] `remix-app` scaffold created at `apps/web`
+- [x] Initial app scaffold created at `apps/web`
 - [x] Render MCP setup doc added at `docs/MCP_SETUP.md`
 - [x] Generated and committed `apps/web/package-lock.json` for Render `npm ci` builds
-- [x] Completed successful Render staging build/deploy from `remix-app`
+- [x] Completed successful Render staging build/deploy from migration branch
 - [x] Added `docs/MCP_SETUP.md` with Render MCP setup steps
 - [x] Pinned `apps/web` Node engine to `20.x` for LTS runtime stability
-- [x] Migrated `apps/web` from Remix v2 CLI to React Router framework tooling
+- [x] Migrated `apps/web` from legacy v2 framework CLI to React Router framework tooling
 - [x] Removed Vite CJS deprecation warning from build output
 - [x] Verified full `npm audit` and `npm audit --omit=dev` at 0 vulnerabilities
 
 ## Session Checkpoint (2026-03-02)
 
-- [x] Merged `master` into `remix-app` and resolved planning-doc conflicts
-- [x] Merged `remix-app` into `master` and deleted `remix-app` remote branch
+- [x] Merged `master` into migration branch and resolved planning-doc conflicts
+- [x] Merged migration branch into `master` and deleted the remote migration branch
 - [x] Updated Render service to deploy from `master`
 - [x] Enabled Render Pull Request Previews for PR validation
 - [x] Added Render GitHub check workflow (`.github/workflows/render-preview-check.yml`)
@@ -40,7 +40,7 @@ Last updated: March 2026
 - [x] Root `README.md` standardized across active branches
 - [x] Vercel branch deploys constrained via `vercel.json` (`master` only)
 - [x] Render staging route parity wired to legacy marketing pages in `apps/web/static-pages`
-- [x] React Router scaffold created at `apps/web` on `remix-app` branch
+- [x] React Router scaffold created at `apps/web` on migration branch
 - [x] Render staging deployment from `apps/web`
 - [x] Marketing route parity wiring complete in staging app
 - [x] Dependency/security hardening cycle baseline completed
