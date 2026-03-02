@@ -35,26 +35,24 @@ Last updated: March 2026
 - [x] Root `README.md` standardized across active branches
 - [x] Vercel branch deploys constrained via `vercel.json` (`master` only)
 - [x] Render staging route parity wired to legacy marketing pages in `apps/web/static-pages`
-
-## In Progress
-
 - [x] React Router scaffold created at `apps/web` on `remix-app` branch
 - [x] Render staging deployment from `apps/web`
 - [x] Marketing route parity wiring complete in staging app
+- [x] Dependency/security hardening cycle baseline completed
+
+## In Progress
+
 - [ ] Repo-wide static-page consistency sweep (remaining menu/mobile-nav semantics, root-relative asset paths, and footer-year normalization)
 - [ ] Manual visual QA sweep on Render staging URL for all public routes/assets
 - [ ] Split-host routing decision for staging (`data-wand.ai` + `app.data-wand.ai`) vs unified host
 
 ## Planned
 
-- [ ] Dependency/security hardening cycle (before heavy feature build):
-  - [x] Audit triage baseline complete (`npm audit` + `npm audit --omit=dev`)
-  - [x] Runtime/prod vulnerabilities confirmed at 0
-  - [x] Dev/build vulnerabilities reduced to 0 after React Router migration
-  - [x] Upgrade spike completed: moved to React Router framework tooling
-- [ ] React Router parity verification checklist:
+- [ ] React Router parity verification checklist (remaining):
+  - Completed:
   - [x] Ported static route set (`/`, `/about`, `/how-it-works`, `/pricing`, `/use-cases/:slug`)
   - [x] Static assets (CSS/JS/images) served from `apps/web/public`
+  - Remaining:
   - [ ] Validate no broken internal links (desktop + mobile) on Render staging
   - [ ] Preserve canonical tags, sitemap, robots behavior
 - [ ] Post-cutover runtime upgrade: Node 20 -> Node 22 (before Node 20 EOL)
