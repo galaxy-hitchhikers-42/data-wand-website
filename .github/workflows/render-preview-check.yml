@@ -21,12 +21,12 @@ jobs:
       - name: Validate Render check configuration
         id: config
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_STAGING_DEPLOY_HOOK }}
-          HEALTH_URL: ${{ vars.RENDER_STAGING_HEALTH_URL }}
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          HEALTH_URL: ${{ vars.RENDER_HEALTHCHECK_URL }}
         run: |
           if [[ -z "${DEPLOY_HOOK}" || -z "${HEALTH_URL}" ]]; then
             echo "configured=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Skipping Render preview check. Set secrets.RENDER_STAGING_DEPLOY_HOOK and vars.RENDER_STAGING_HEALTH_URL."
+            echo "::warning::Skipping Render preview check. Set secrets.RENDER_DEPLOY_HOOK_URL and vars.RENDER_HEALTHCHECK_URL."
           else
             echo "configured=true" >> "$GITHUB_OUTPUT"
           fi
@@ -34,14 +34,14 @@ jobs:
       - name: Trigger Render staging deploy
         if: steps.config.outputs.configured == 'true'
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_STAGING_DEPLOY_HOOK }}
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl -fsS -X POST "${DEPLOY_HOOK}" >/dev/null
 
       - name: Wait for healthy Render response
         if: steps.config.outputs.configured == 'true'
         env:
-          HEALTH_URL: ${{ vars.RENDER_STAGING_HEALTH_URL }}
+          HEALTH_URL: ${{ vars.RENDER_HEALTHCHECK_URL }}
         run: |
           attempts=30
           sleep_seconds=10
@@ -60,4 +60,3 @@ jobs:
 
           echo "::error::Render health check did not return HTTP 200 in time (${HEALTH_URL})."
           exit 1
-
