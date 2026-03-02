@@ -30,3 +30,7 @@ Set these in GitHub repository settings:
 ## Suggested Next Step After Cutover
 
 Once Render is your primary production path, require this check in branch protection for `master`.
+
+## Notes
+
+- The workflow intentionally runs on PR updates so you can verify Render health before merge.
