@@ -45,11 +45,11 @@ Last updated: March 2026
 - [x] Dependency/security hardening cycle baseline completed
 - [x] Render production deployment source set to `master`
 - [x] Render PR previews enabled for branch/PR testing
-- [x] Team branch workflow decided: `feature/*` -> `staging` -> `master`
+- [x] Team branch workflow decided: default `feature/*` -> `master`, with optional `staging` integration flow for batched/higher-risk releases
 
 ## In Progress
 
-- [ ] Adopt/verify `staging` release branch flow in daily development (feature PRs to `staging`, release PRs to `master`)
+- [ ] Document lightweight branch-routing guidance for the team (when to go direct `feature/*` -> `master` vs when to use `staging`)
 - [ ] Repo-wide static-page consistency sweep (remaining menu/mobile-nav semantics, root-relative asset paths, and footer-year normalization)
 - [ ] Manual visual QA sweep on Render staging URL for all public routes/assets
 - [ ] Split-host routing decision for staging (`data-wand.ai` + `app.data-wand.ai`) vs unified host

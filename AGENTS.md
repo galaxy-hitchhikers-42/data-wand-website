@@ -9,11 +9,12 @@ Applies to the entire repository unless a deeper-path `AGENTS.md` overrides part
 ## Workflow Defaults
 
 1. Do not work directly on `master`/`main`.
-2. Feature work should branch from `staging` (for example `feature/<name>`).
-3. Open PRs into `staging` for review/preview validation first.
-4. Promote releases via PR from `staging` to `master`.
-5. Keep commits granular and logically scoped.
-6. Prefer opening a PR for review rather than pushing directly to protected branches.
+2. Use task branches for all non-trivial changes (for example `feature/<name>`).
+3. Default merge path is PR from feature branch to `master`.
+4. Use `staging` as an optional integration/release branch when batching or higher-risk coordination is needed.
+5. When `staging` is used, promote via PR from `staging` to `master`.
+6. Keep commits granular and logically scoped.
+7. Prefer opening a PR for review rather than pushing directly to protected branches.
 
 ## Planning and Execution
 
