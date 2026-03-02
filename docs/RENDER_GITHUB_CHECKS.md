@@ -10,11 +10,11 @@ It runs on PRs to `master`, triggers a Render deploy, and polls a health endpoin
 
 Set these in GitHub repository settings:
 
-1. **Secret**: `RENDER_STAGING_DEPLOY_HOOK`
-- Value: Render deploy hook URL for your staging web service
+1. **Secret**: `RENDER_DEPLOY_HOOK_URL`
+- Value: Render deploy hook URL for the Render service this PR check should validate
 
-2. **Repository variable**: `RENDER_STAGING_HEALTH_URL`
-- Value: Full URL to the health endpoint (for example `https://your-staging-url/health`)
+2. **Repository variable**: `RENDER_HEALTHCHECK_URL`
+- Value: Full URL to the health endpoint (for example `https://your-render-url/health`)
 
 ## Behavior
 
