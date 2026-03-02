@@ -9,9 +9,11 @@ Applies to the entire repository unless a deeper-path `AGENTS.md` overrides part
 ## Workflow Defaults
 
 1. Do not work directly on `master`/`main`.
-2. Create or use a task branch for all changes.
-3. Keep commits granular and logically scoped.
-4. Prefer opening a PR for review rather than pushing directly to default branch.
+2. Feature work should branch from `staging` (for example `feature/<name>`).
+3. Open PRs into `staging` for review/preview validation first.
+4. Promote releases via PR from `staging` to `master`.
+5. Keep commits granular and logically scoped.
+6. Prefer opening a PR for review rather than pushing directly to protected branches.
 
 ## Planning and Execution
 

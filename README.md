@@ -38,6 +38,15 @@ Then open the local dev URL printed by the React Router dev server.
 - Render service deploys from `master` (`apps/web` rootDir).
 - Vercel is retained as a legacy fallback path (`legacy-vercel` branch).
 - Render check workflow: `.github/workflows/render-preview-check.yml`
+- Render Pull Request Previews are enabled for branch/PR validation.
+
+## Git Workflow
+
+- Feature work: branch from `staging` using `feature/*`.
+- Integration: open PRs from `feature/*` into `staging`.
+- Validation: review and QA using Render PR Preview URLs.
+- Release: open PR from `staging` into `master`.
+- Production: Render deploys from `master`.
 
 ## Planning Docs
 
