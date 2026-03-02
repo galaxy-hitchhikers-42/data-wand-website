@@ -42,10 +42,9 @@ Then open the local dev URL printed by the React Router dev server.
 
 ## Git Workflow
 
-- Feature work: branch from `staging` using `feature/*`.
-- Integration: open PRs from `feature/*` into `staging`.
-- Validation: review and QA using Render PR Preview URLs.
-- Release: open PR from `staging` into `master`.
+- Default flow: `feature/*` -> `master` with PR review + Render PR Preview validation.
+- Optional integration flow: `feature/*` -> `staging` for combined QA/release batching.
+- Release flow when using staging: `staging` -> `master`.
 - Production: Render deploys from `master`.
 
 ## Planning Docs
