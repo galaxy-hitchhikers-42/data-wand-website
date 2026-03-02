@@ -1,13 +1,14 @@
 # Data Wand Website
 
-Marketing site for Data Wand, currently deployed on Vercel at:
+Website repository for Data Wand.
 
-- https://data-wand.ai
+Primary production hosting is now Render, deploying from `master`.
 
 ## Stack
 
-- Static HTML/CSS/JS (current)
-- Vercel hosting
+- React Router app in `apps/web`
+- Render hosting (primary)
+- Static marketing source files in `apps/web/static-pages`
 - Cloudflare DNS for `data-wand.ai`
 - GoDaddy forwarding for `data-wand.com` and `www.data-wand.com`
 
@@ -22,28 +23,24 @@ Marketing site for Data Wand, currently deployed on Vercel at:
 
 ## Local Preview
 
-Use any static file server from repo root. Example:
+Run the web app from `apps/web`:
 
 ```bash
-python3 -m http.server 8080
+cd apps/web
+npm install
+npm run dev
 ```
 
-Then open `http://localhost:8080`.
+Then open the local dev URL printed by the React Router dev server.
 
 ## Deployments
 
-- Vercel project tracks this repository.
-- Production branch is currently `master`.
-- URL routing is configured in `vercel.json`.
+- Render service deploys from `master` (`apps/web` rootDir).
+- Vercel is retained as a legacy fallback path (`legacy-vercel` branch).
+- Render check workflow: `.github/workflows/render-preview-check.yml`
 
-## Migration Notes
+## Planning Docs
 
-GitHub Pages -> Vercel cutover runbook and verification checklist:
-
-- `docs/README.md`
-
-## Next Planned Phase
-
-Planned migration to a Next.js product site is defined in:
-
-- `yc-datawand/docs/planning/nextjs-product-site-spec.md` (in the main product repo)
+- `docs/ROADMAP.md`
+- `docs/remix-product-site-spec.md`
+- `docs/RENDER_GITHUB_CHECKS.md`
