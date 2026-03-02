@@ -1,0 +1,63 @@
+name: Render Preview Check
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: read
+
+jobs:
+  render-preview-check:
+    name: Render Preview Health Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate Render check configuration
+        id: config
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_STAGING_DEPLOY_HOOK }}
+          HEALTH_URL: ${{ vars.RENDER_STAGING_HEALTH_URL }}
+        run: |
+          if [[ -z "${DEPLOY_HOOK}" || -z "${HEALTH_URL}" ]]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Skipping Render preview check. Set secrets.RENDER_STAGING_DEPLOY_HOOK and vars.RENDER_STAGING_HEALTH_URL."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trigger Render staging deploy
+        if: steps.config.outputs.configured == 'true'
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_STAGING_DEPLOY_HOOK }}
+        run: |
+          curl -fsS -X POST "${DEPLOY_HOOK}" >/dev/null
+
+      - name: Wait for healthy Render response
+        if: steps.config.outputs.configured == 'true'
+        env:
+          HEALTH_URL: ${{ vars.RENDER_STAGING_HEALTH_URL }}
+        run: |
+          attempts=30
+          sleep_seconds=10
+
+          for i in $(seq 1 "${attempts}"); do
+            status_code="$(curl -sS -o /tmp/render-health-response.txt -w "%{http_code}" "${HEALTH_URL}")"
+
+            if [[ "${status_code}" == "200" ]]; then
+              echo "Render health check passed on attempt ${i}/${attempts}"
+              exit 0
+            fi
+
+            echo "Attempt ${i}/${attempts}: health endpoint returned HTTP ${status_code}"
+            sleep "${sleep_seconds}"
+          done
+
+          echo "::error::Render health check did not return HTTP 200 in time (${HEALTH_URL})."
+          exit 1
+
