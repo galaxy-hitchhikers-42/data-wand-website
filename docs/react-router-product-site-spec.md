@@ -5,26 +5,27 @@ Date: March 2026
 
 ## 0. Immediate Execution Priority (Current)
 
-Before major feature implementation, complete a short hardening + parity cycle:
+Before major feature implementation, maintain a short hardening + parity cycle:
 
-1. Keep runtime stable on Node 20 LTS in Render (`engines.node = 20.x`)
+1. Keep runtime stable on current production baseline (Node 20) while planning Node 22 upgrade
 2. Maintain security policy:
    - Prod/runtime dependencies must remain at 0 known vulnerabilities
    - Dev/build vulnerabilities are tracked and reduced intentionally (no blind auto-fix)
-3. Reach full staging navigability for all public marketing routes in React Router
+3. Reach full navigability/SEO parity for public marketing routes in React Router
 4. Only then begin broader auth/dashboard feature delivery
 
 ## 1. Objective
 
-Keep the current static marketing site live on Vercel while building a new full product hub in React Router framework mode, deployed on Render.  
-Cut over only after auth, billing, and dashboard parity is complete.
+Operate the website and product hub on Render (`master` deploy source) using React Router framework mode, while completing auth, billing, and dashboard parity.
 
 ## 2. Current State
 
-- Production marketing site: static HTML/CSS/JS on Vercel (`data-wand.ai`)
+- Production website is served from Render (`data-wand.ai`)
 - GitHub Pages decommissioned
 - DNS active via Cloudflare (`.ai`)
 - `.com` redirects managed in GoDaddy
+- Render Pull Request Previews enabled for branch/PR validation
+- Vercel retained as legacy fallback path (`legacy-vercel` branch)
 
 ## 3. Target Architecture
 
@@ -34,16 +35,18 @@ Cut over only after auth, billing, and dashboard parity is complete.
 - Billing: Stripe (Checkout + Portal + Webhooks)
 - Styling: Tailwind CSS (or existing CSS migration path)
 - Deployment model:
-- Existing static site remains production during build
+- Static marketing source lives in `apps/web/static-pages`
 - React Router app lives under `apps/web`
-- Staging URL on Render for integration testing
+- Render preview/staging URLs are used for integration testing
 
 ## 4. Repository Strategy
 
-- Keep static site at repo root (current production)
-- Add React Router app at `apps/web`
-- New active branch for app build (for example `remix-app`)
-- Deploy staging from `apps/web` on Render
+- React Router app is implemented at `apps/web`
+- Active deployment branch for production: `master`
+- Team workflow:
+  - Default: `feature/*` -> `master`
+  - Optional integration flow: `feature/*` -> `staging` -> `master`
+- Render Pull Request Previews validate branch changes before merge
 
 ## 5. Route Plan (React Router)
 
@@ -110,10 +113,10 @@ Target for the web app should match the prior recommendation from planning docs:
 - Preferred: move Worker auth to Supabase Auth JWT validation (single identity)
 - Transitional fallback: keep Worker auth and add account-linking (`profile_id`)
 
-Until this is done, dashboard usage/billing in Remix will only be partially aligned
+Until this is done, dashboard usage/billing in React Router will only be partially aligned
 with extension/iOS identity.
 
-## 6.3 Cloudflare Role (Remix + Render Architecture)
+## 6.3 Cloudflare Role (React Router + Render Architecture)
 
 Cloudflare remains in scope even if the web app is hosted on Render:
 
@@ -187,13 +190,18 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 - Build usage charts/cards
 - Integrate extension/iOS event logging
 
-### Phase 6 — Cutover
+### Phase 6 — Cutover (Completed)
 
-- Decide host strategy:
-- Option A: Keep marketing root on Vercel, app at `app.data-wand.ai` (Render)
-- Option B: Move full site to Render at `data-wand.ai`
-- Run final redirect/SEO checks
-- Execute production DNS cutover only after parity sign-off
+- Merged React Router branch into `master`
+- Switched Render service deploy source to `master`
+- Enabled Render Pull Request Previews
+- Production traffic served from Render at `data-wand.ai`
+
+### Phase 7 — Post-Cutover Optimization
+
+- Implement Cloudflare edge caching for marketing routes while keeping app/auth/api uncached
+- Complete remaining static-page consistency sweep and manual visual QA
+- Plan and execute Node 20 -> Node 22 runtime upgrade
 
 ## 9. Acceptance Criteria
 
@@ -209,15 +217,15 @@ Hosting decision (Vercel/Render) and Worker decision are separate concerns.
 
 ## 10. Open Decisions
 
-- Canonical production topology:
-- Split-host (`data-wand.ai` marketing + `app.data-wand.ai` app)
-- Unified-host (all routes on Render)
+- Optional future topology refinement:
+- Keep unified-host on Render (current)
+- Evaluate split-host only if release cadence/performance requirements justify it
 - Styling migration approach:
 - Keep current CSS and incrementally modernize
 - Tailwind-first rewrite during port
 
-## 11. Current Build/Tooling Status (2026-03-01)
+## 11. Current Build/Tooling Status (2026-03-02)
 
-- Migration to React Router framework tooling completed on `remix-app`
+- Migration to React Router framework tooling completed and merged to `master`
 - Build warning status: Vite CJS deprecation warning no longer present
 - Security status: full and prod-only audits both report 0 vulnerabilities
