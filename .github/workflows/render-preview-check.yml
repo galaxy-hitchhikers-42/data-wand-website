@@ -21,8 +21,8 @@ jobs:
       - name: Validate Render check configuration
         id: config
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-          HEALTH_URL: ${{ vars.RENDER_HEALTHCHECK_URL }}
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL || vars.RENDER_DEPLOY_HOOK_URL }}
+          HEALTH_URL: ${{ vars.RENDER_HEALTHCHECK_URL || secrets.RENDER_HEALTHCHECK_URL }}
         run: |
           if [[ -z "${DEPLOY_HOOK}" || -z "${HEALTH_URL}" ]]; then
             echo "configured=false" >> "$GITHUB_OUTPUT"
@@ -34,14 +34,14 @@ jobs:
       - name: Trigger Render staging deploy
         if: steps.config.outputs.configured == 'true'
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL || vars.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl -fsS -X POST "${DEPLOY_HOOK}" >/dev/null
 
       - name: Wait for healthy Render response
         if: steps.config.outputs.configured == 'true'
         env:
-          HEALTH_URL: ${{ vars.RENDER_HEALTHCHECK_URL }}
+          HEALTH_URL: ${{ vars.RENDER_HEALTHCHECK_URL || secrets.RENDER_HEALTHCHECK_URL }}
         run: |
           attempts=30
           sleep_seconds=10
