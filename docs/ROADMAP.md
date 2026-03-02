@@ -7,7 +7,7 @@ Last updated: March 2026
 - [x] Vercel migration completed and validated on `data-wand.ai`
 - [x] `vercel-migration` branch deleted (local + remote)
 - [x] `remix-app` scaffold created at `apps/web`
-- [x] Project MCP file added at `.vscode/mcp.json` (Render server via env var token)
+- [x] Render MCP setup doc added at `docs/MCP_SETUP.md`
 - [x] Generated and committed `apps/web/package-lock.json` for Render `npm ci` builds
 - [x] Completed successful Render staging build/deploy from `remix-app`
 - [x] Added `docs/MCP_SETUP.md` with Render MCP setup steps
@@ -19,10 +19,11 @@ Last updated: March 2026
 ## Session Checkpoint (2026-03-02)
 
 - [x] Merged `master` into `remix-app` and resolved planning-doc conflicts
-- [x] Completed CodeRabbit remediation batch for static-page parity issues:
-  - [x] Accessibility semantics cleanup (dropdown/menu roles and mobile nav landmarks)
-  - [x] Root-relative asset path normalization for use-case pages
-  - [x] Metadata/copy refresh and stale footer year updates
+- [ ] CodeRabbit remediation batch in progress for static-page parity issues:
+  - [x] Initial accessibility semantics cleanup (dropdown/menu roles and mobile nav landmarks)
+  - [x] Initial root-relative asset path normalization for use-case pages
+  - [x] Metadata/copy refresh and many stale footer year updates
+  - [ ] Repo-wide follow-up sweep still needed on untouched static pages
 - [x] Added environment-aware `robots.txt` route in `apps/web` (noindex behavior for non-production hosts)
 - [x] Verified local `apps/web` build passes after remediation (`npm run build`)
 
@@ -40,6 +41,7 @@ Last updated: March 2026
 - [x] React Router scaffold created at `apps/web` on `remix-app` branch
 - [x] Render staging deployment from `apps/web`
 - [x] Marketing route parity wiring complete in staging app
+- [ ] Repo-wide static-page consistency sweep (remaining menu/mobile-nav semantics, root-relative asset paths, and footer-year normalization)
 - [ ] Manual visual QA sweep on Render staging URL for all public routes/assets
 - [ ] Split-host routing decision for staging (`data-wand.ai` + `app.data-wand.ai`) vs unified host
 
