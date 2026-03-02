@@ -21,7 +21,7 @@ jobs:
       - name: Validate Render check configuration
         id: config
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL || vars.RENDER_DEPLOY_HOOK_URL }}
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL || secrets.RENDER_DEPLOY_HOOK || vars.RENDER_DEPLOY_HOOK_URL }}
           HEALTH_URL: ${{ vars.RENDER_HEALTHCHECK_URL || secrets.RENDER_HEALTHCHECK_URL }}
         run: |
           if [[ -z "${DEPLOY_HOOK}" || -z "${HEALTH_URL}" ]]; then
@@ -34,7 +34,7 @@ jobs:
       - name: Trigger Render staging deploy
         if: steps.config.outputs.configured == 'true'
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL || vars.RENDER_DEPLOY_HOOK_URL }}
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL || secrets.RENDER_DEPLOY_HOOK || vars.RENDER_DEPLOY_HOOK_URL }}
         run: |
           curl -fsS -X POST "${DEPLOY_HOOK}" >/dev/null
 
